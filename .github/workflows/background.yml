@@ -1,0 +1,22 @@
+name: Background Service
+
+on:
+  schedule:
+    # Runs every 5 minutes (you can adjust the cron pattern)
+    - cron: '*/5 * * * *'
+  workflow_dispatch:   # allows manual triggering for testing
+
+jobs:
+  run-task:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run the background script
+        run: node task.js
